@@ -79,7 +79,7 @@ public class ArtifactoryImageNameSubstitutor extends ImageNameSubstitutor {
 
     static String getPrivateRegistry() {
         String artifactoryServer = System.getProperty(artifactoryRegistryKey);
-        if (artifactoryServer == null || artifactoryServer.isEmpty() || artifactoryServer.startsWith("${"))
+        if (artifactoryServer == null || artifactoryServer.isEmpty() || artifactoryServer.startsWith("${") || artifactoryServer.equals("null"))
             throw new IllegalStateException("No private registry configured. System property '" + artifactoryRegistryKey + "' was: " + artifactoryServer);
         if (artifactoryServer.startsWith("na.") || artifactoryServer.startsWith("eu."))
             artifactoryServer = artifactoryServer.substring(3);
