@@ -90,7 +90,7 @@ public class FATBase extends FATServletClient {
     message = server_.waitForStringInLog("CWWKO0219I:.*InboundJmsCommsEndpoint-ssl.*", server_.getMatchingLogFile("messages.log"));
     assertNotNull("Could not find the JMS SSL port ready message in the message log", message);
 
-    client_.startServer();
+    client_.startServerAndValidate(true, true, true, false, true, false); //defaults other than disabling port validation
     Util.CODEPATH();
 
     message = client_.waitForStringInLog("CWWKF0011I:.*", client_.getMatchingLogFile("messages.log"));

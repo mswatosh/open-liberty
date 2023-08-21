@@ -1406,7 +1406,26 @@ public class LibertyServer implements LogMonitorClient {
     public ProgramOutput startServerAndValidate(boolean preClean, boolean cleanStart,
                                                 boolean validateApps, boolean expectStartFailure,
                                                 boolean validateTimedExit) throws Exception {
-        return startServerWithArgs(preClean, cleanStart, validateApps, expectStartFailure, "start", null, validateTimedExit);
+        return startServerWithArgs(preClean, cleanStart, validateApps, expectStartFailure, "start", null, validateTimedExit, true);
+    }
+
+    /**
+     * Start the server and validate that the server was started
+     *
+     * @param  preClean           if true, the server directory will be reset before
+     *                                the server is started (reverted to vanilla backup).
+     * @param  cleanStart         if true, the server will be started with a clean start
+     * @param  validateApps       if true, block until all of the registered apps have started
+     * @param  expectStartFailure if true, a the server is not expected to start
+     *                                due to a failure
+     * @param  validateTimedExit  if true, the server will make sure that timedexit-1.0 is enabled
+     * @param  validatePortsOpen  if true, checks if the default http port is open
+     * @throws Exception
+     */
+    public ProgramOutput startServerAndValidate(boolean preClean, boolean cleanStart,
+                                                boolean validateApps, boolean expectStartFailure,
+                                                boolean validateTimedExit, boolean validatePortsOpen) throws Exception {
+        return startServerWithArgs(preClean, cleanStart, validateApps, expectStartFailure, "start", null, validateTimedExit, validatePortsOpen);
     }
 
     public enum IncludeArg {
@@ -1423,17 +1442,17 @@ public class LibertyServer implements LogMonitorClient {
 
     public void packageServer(final IncludeArg include, final String otherPackageArgs, final String osFilter) throws Exception {
         final ArrayList<String> args = setArgsExtended(include, otherPackageArgs, osFilter);
-        startServerWithArgs(true, false, false, false, "package", args, true);
+        startServerWithArgs(true, false, false, false, "package", args, true, true);
     }
 
     public void packageServer(final IncludeArg include, final String osFilter) throws Exception {
         final ArrayList<String> args = setArgs(include, osFilter);
-        startServerWithArgs(true, false, false, false, "package", args, true);
+        startServerWithArgs(true, false, false, false, "package", args, true, true);
     }
 
     public void packageServerWithCleanStart(final IncludeArg include, final String osFilter) throws Exception {
         final ArrayList<String> args = setArgs(include, osFilter);
-        startServerWithArgs(true, true, false, false, "package", args, true);
+        startServerWithArgs(true, true, false, false, "package", args, true, true);
     }
 
     protected ArrayList<String> setArgs(final IncludeArg include, final String osFilter) {
@@ -1457,7 +1476,7 @@ public class LibertyServer implements LogMonitorClient {
     public ProgramOutput startServerWithArgs(boolean preClean, boolean cleanStart,
                                              boolean validateApps, boolean expectStartFailure,
                                              String serverCmd, List<String> args,
-                                             boolean validateTimedExit) throws Exception {
+                                             boolean validateTimedExit, boolean validatePortsOpen) throws Exception {
         final String method = "startServerWithArgs";
         Log.info(c, method, ">>> STARTING SERVER: " + this.getServerName());
         Log.info(c, method,
@@ -1499,7 +1518,9 @@ public class LibertyServer implements LogMonitorClient {
         if (this.additionalSystemProperties != null && this.additionalSystemProperties.size() > 0) {
             envVars.putAll(this.additionalSystemProperties);
         }
-        checkPortsOpen(true);
+
+        if (validatePortsOpen)
+            checkPortsOpen(true);
 
         final String cmd = installRoot + "/bin/server";
         ArrayList<String> parametersList = new ArrayList<String>();

@@ -111,7 +111,8 @@ public class JMSContextTest_118066 {
         server.setServerConfigurationFile("JMSContext_ssl.xml");
         server1.setServerConfigurationFile("TestServer1_ssl.xml");
         server.startServer("JMSContextTest_118066_Client.log");
-        server1.startServer("JMSContextTest_118066_Server.log");
+        server1.setConsoleLogName("JMSContextTest_118066_Server.log");
+        server1.startServerAndValidate(true, true, true, false, true, false); //defaults other than disabling port validation
 
         // CWWKF0011I: The TestServer1 server is ready to run a smarter planet. The TestServer1 server started in 6.435 seconds.
         // CWSID0108I: JMS server has started.

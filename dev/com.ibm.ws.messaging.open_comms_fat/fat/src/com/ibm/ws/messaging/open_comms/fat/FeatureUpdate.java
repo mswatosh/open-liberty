@@ -82,14 +82,13 @@ public class FeatureUpdate extends FATBase {
     // on this in their interaction with client_
     Util.TRACE("restart client");
     client_.stopServer("^.*[EW] .*\\d{4}[EW]:.*$");   // ignore all errors from prior tests
-    client_.startServer();                            // leave the server clean for future tests
-
+    client_.startServer(); // leave the server clean for future tests
     Util.TRACE("stop server");
     server_.stopServer();
     Util.TRACE("changing server.xml to SecurityEnabledServer");
     server_.setServerConfigurationFile("SecurityEnabledServer.xml");
     Util.TRACE("starting server ");
-    server_.startServer();
+    server_.startServerAndValidate(true, true, true, false, true, false); //defaults other than disabling port validation
     Util.TRACE_EXIT();
   }
 
