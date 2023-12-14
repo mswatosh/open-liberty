@@ -16,46 +16,10 @@
 
 bVersion=1.0
 
-
 WS-TraceGroup: concurrent
 
-IBM-Default-Config: OSGI-INF/wlp/defaultInstances.xml
-
-Export-Package:\
-  com.ibm.ws.concurrent.internal.java21
-
-Import-Package:\
-  org.eclipse.microprofile.context; version="[1.0.0,2.0.0)",\
-  *
-
 Private-Package:\
-  com.ibm.ws.concurrent.internal.*,\
-  com.ibm.ws.concurrent.resources.*
-
-Service-Component:\
-  com.ibm.ws.concurrent.managedThreadFactory;\
-    provide:='\
-      com.ibm.wsspi.application.lifecycle.ApplicationRecycleComponent,\
-      com.ibm.wsspi.resource.ResourceFactory';\
-    implementation:=com.ibm.ws.concurrent.internal.ManagedThreadFactoryService;\
-    configuration-policy:=require;\
-    contextService='com.ibm.wsspi.threadcontext.WSContextService';\
-    metadataIdentifierService=com.ibm.ws.container.service.metadata.extended.MetaDataIdentifierService;\
-    threadGroupTracker=com.ibm.ws.concurrent.internal.ThreadGroupTracker;\
-    properties:='\
-      contextService.target=(id=unbound),\
-      creates.objectClass=|java.util.concurrent.ThreadFactory|javax.enterprise.concurrent.ManagedThreadFactory',\
-  com.ibm.ws.concurrent.tracker;\
-      provide:='\
-        com.ibm.ws.container.service.metadata.ComponentMetaDataListener,\
-        com.ibm.ws.concurrent.internal.ThreadGroupTracker';\
-    implementation:=com.ibm.ws.concurrent.internal.ThreadGroupTracker;\
-    configuration-policy:=ignore;\
-    immediate:=true;\
-    deferrableScheduledExecutor='java.util.concurrent.ScheduledExecutorService(deferrable=true)';\
-    metadataIdentifierService=com.ibm.ws.container.service.metadata.extended.MetaDataIdentifierService
-
-instrument.classesExcludes: com/ibm/ws/concurrent/resources/*.class
+  com.ibm.ws.concurrent.internal.java21
 
 -buildpath: \
 	com.ibm.ws.concurrent,\
@@ -78,3 +42,6 @@ instrument.classesExcludes: com/ibm/ws/concurrent/resources/*.class
 	com.ibm.wsspi.org.osgi.service.metatype.annotations;version=latest,\
 	io.openliberty.org.eclipse.microprofile.contextpropagation.1.2,\
 	jakarta.enterprise.concurrent-api
+
+javac.source: 21
+javac.target: 21

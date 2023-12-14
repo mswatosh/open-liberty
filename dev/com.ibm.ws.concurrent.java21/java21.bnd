@@ -23,6 +23,3 @@ Bundle-Description: Application server-managed concurrency utilities for Java 21
   com.ibm.ws.concurrent.internal.ManagedScheduledExecutorServiceImpl
 
 -dsannotations-inherit: true
-
-javac.source: 21
-javac.target: 21

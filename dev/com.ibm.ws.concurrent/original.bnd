@@ -17,7 +17,6 @@ Bundle-Description: Application server-managed concurrency utilities; version=${
 
 -dsannotations: \
   com.ibm.ws.concurrent.internal.ConcurrencyService,\
-  com.ibm.ws.concurrent.internal.java8.ContextServiceImpl,\
   com.ibm.ws.concurrent.internal.ManagedExecutorServiceImpl,\
   com.ibm.ws.concurrent.internal.ManagedScheduledExecutorServiceImpl
 

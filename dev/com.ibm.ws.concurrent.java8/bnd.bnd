@@ -17,7 +17,12 @@ bVersion=1.0
 -sub: *.bnd
 
 Private-Package:\
-  com.ibm.ws.concurrent.internal.*
+  com.ibm.ws.concurrent.internal.java8
+  
+-dsannotations: \
+  com.ibm.ws.concurrent.internal.java8.ContextServiceImpl,\
+  
+-dsannotations-inherit: true
 
 -buildpath: \
 	com.ibm.ws.concurrent,\

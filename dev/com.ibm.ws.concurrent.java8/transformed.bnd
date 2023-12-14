@@ -17,7 +17,7 @@ Bundle-SymbolicName: com.ibm.ws.concurrent.java8.jakarta
 Bundle-Description: Application server-managed concurrency utilities java8 features; version=${bVersion}; Jakarta Enabled
 
 Fragment-Host: \
-	com.ibm.ws.concurrent.jakarta.jar
+	com.ibm.ws.concurrent.jakarta
 
 Provide-Capability: \
 	com.ibm.ws.concurrent.java8.jakarta
