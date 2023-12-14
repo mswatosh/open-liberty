@@ -10,17 +10,20 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.ibm.ws.concurrent.internal;
+package com.ibm.ws.concurrent.internal.java21;
 
-import javax.enterprise.concurrent.ContextService;
+import java.util.concurrent.Flow;
 
 import org.eclipse.microprofile.context.ThreadContext;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
+import com.ibm.ws.concurrent.internal.ContextServiceBase;
 import com.ibm.wsspi.application.lifecycle.ApplicationRecycleComponent;
 import com.ibm.wsspi.resource.ResourceFactory;
 import com.ibm.wsspi.threadcontext.WSContextService;
+
+import jakarta.enterprise.concurrent.ContextService;
 
 /**
  * Captures and propagates thread context.
@@ -31,6 +34,13 @@ import com.ibm.wsspi.threadcontext.WSContextService;
            service = { ResourceFactory.class, ContextService.class, ThreadContext.class, WSContextService.class, ApplicationRecycleComponent.class },
            property = { "creates.objectClass=javax.enterprise.concurrent.ContextService",
                         "creates.objectClass=org.eclipse.microprofile.context.ThreadContext" })
-public class ContextServiceImpl extends ContextServiceBase {
+public class ContextServiceImpl extends ContextServiceBase implements ContextService {
 
+    public <T> Flow.Subscriber<T> contextualSubscriber(Flow.Subscriber<T> subscriber) {
+        throw new UnsupportedOperationException("contextualSubscriber is not implemented");
+    }
+
+    public <T, R> Flow.Processor<T, R> contextualProcessor(Flow.Processor<T, R> processor) {
+        throw new UnsupportedOperationException("contextualProcessor is not implemented");
+    }
 }

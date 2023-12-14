@@ -22,9 +22,7 @@ WS-TraceGroup: concurrent
 IBM-Default-Config: OSGI-INF/wlp/defaultInstances.xml
 
 Export-Package:\
-  com.ibm.ws.concurrent,\
-  com.ibm.ws.concurrent.ext,\
-  com.ibm.ws.concurrent.mp.spi.*
+  com.ibm.ws.concurrent.internal.java21
 
 Import-Package:\
   org.eclipse.microprofile.context; version="[1.0.0,2.0.0)",\
@@ -33,9 +31,6 @@ Import-Package:\
 Private-Package:\
   com.ibm.ws.concurrent.internal.*,\
   com.ibm.ws.concurrent.resources.*
-
-Include-Resource:\
-  OSGI-INF=resources/OSGI-INF
 
 Service-Component:\
   com.ibm.ws.concurrent.managedThreadFactory;\
@@ -63,6 +58,7 @@ Service-Component:\
 instrument.classesExcludes: com/ibm/ws/concurrent/resources/*.class
 
 -buildpath: \
+	com.ibm.ws.concurrent,\
 	com.ibm.websphere.appserver.spi.kernel.service,\
 	com.ibm.websphere.appserver.spi.logging,\
 	com.ibm.websphere.javaee.concurrent.1.0;version=latest,\

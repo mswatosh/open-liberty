@@ -12,6 +12,12 @@
 #*******************************************************************************
 -include= ~../cnf/resources/bnd/transform.props
 
-Bundle-Name: Managed Concurrency Jakarta
+Bundle-Name: Managed Concurrency Jakarta java8
 Bundle-SymbolicName: com.ibm.ws.concurrent.java8.jakarta
-Bundle-Description: Application server-managed concurrency utilities; version=${bVersion}; Jakarta Enabled
+Bundle-Description: Application server-managed concurrency utilities java8 features; version=${bVersion}; Jakarta Enabled
+
+Fragment-Host: \
+	com.ibm.ws.concurrent.jakarta.jar
+
+Provide-Capability: \
+	com.ibm.ws.concurrent.java8.jakarta

@@ -11,7 +11,12 @@
 #     IBM Corporation - initial API and implementation
 #*******************************************************************************
 
-Bundle-Name: Managed Concurrency
+Bundle-Name: Managed Concurrency java8
 Bundle-SymbolicName: com.ibm.ws.concurrent.java8
-Bundle-Description: Application server-managed concurrency utilities; version=${bVersion}
+Bundle-Description: Application server-managed concurrency utilities java8 features; version=${bVersion}
 
+Fragment-Host: \
+	com.ibm.ws.concurrent.jar
+	
+Provide-Capability: \
+	com.ibm.ws.concurrent.java8
