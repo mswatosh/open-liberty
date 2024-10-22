@@ -249,9 +249,9 @@ public class BvalManagedObjectBuilderImpl implements BvalManagedObjectBuilder {
         BootstrapConfiguration configSource = config.getBootstrapConfiguration();
         String constraintValidatorFactoryClassName = configSource.getConstraintValidatorFactoryClassName();
         ConstraintValidatorFactory cvf = null;
-        if (constraintValidatorFactoryClassName == null) {
-            // use default
+        if (constraintValidatorFactoryClassName == null) { // use default
             if (isBeanValidationVersion31()) {
+                //Hibernate Validator 9.0+ package location for InjectingConstraintValidatorFactory
                 cvf = (ConstraintValidatorFactory) createManagedObject(org.hibernate.validator.cdi.spi.InjectingConstraintValidatorFactory.class);
             } else {
                 cvf = createManagedObject(org.hibernate.validator.cdi.internal.InjectingConstraintValidatorFactory.class);
